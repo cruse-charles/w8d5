@@ -1,4 +1,4 @@
-function sum(...array) {
+function sum(array) {
   let total = 0;
 
   for (let i = 0; i < array.length; i++) {
@@ -7,15 +7,6 @@ function sum(...array) {
   return total;
 }
 
-function continuousAdd(num) {
-  let args = [];
-
-  return function _curryAdd(num) {
-    args.push(num);
-    console.log(sum(args));
-    // return _curryAdd
-  };
-}
 
 // ----------------------------------- Bind with Args ----------------------
 
@@ -71,3 +62,21 @@ const notMarkovSays = markov.says.myBind(pavlov);
 notMarkovSays("meow", "me");
 // Pavlov says meow to me!
 // true
+
+
+// ---------------------CurriedSum------------------
+
+
+
+function curriedSum(num) {
+  let args = [];
+
+  return function _curryAdd(num) {
+    args.push(num);
+    console.log(sum(args));
+    return _curryAdd
+  };
+}
+
+const total = curriedSum(4);
+total(5)(30)(20)(1); // => 56
